@@ -17,7 +17,7 @@ NOTE: if using the coverage agent when running the functional/manual tests (see 
 sdk install java 17.0.11.fx-zulu
 sdk use java 17.0.11.fx-zulu
 ```
-
+* 
 * Apache Tomcat `9` is recommended.
 
 * To prevent verbose cache warnings in the tomcat log::
@@ -37,6 +37,12 @@ Add the following to the `<tomcat install>/config/context.xml` make sure to plac
  ```xml
  <Context antiResourceLocking="true">
  ```
+
+### Stop running processes  
+- Verify that the process is terminated:
+```
+lsof -i :9001
+```
 
 ## Changing default ports
 HyperSQL listens on the default port number `9001`. This port number can conflict with other instances of HyperSQL and may conflict with certain other applications such as the "Intel(R) Graphics Command Center Service". To change the port number to something else like `9002` , modify the following files located under "src/main/resources" or in a deployed WAR under "WEB-INF/classes":
