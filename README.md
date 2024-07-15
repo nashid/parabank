@@ -11,6 +11,13 @@ NOTE: if using the coverage agent when running the functional/manual tests (see 
 ## Apache Tomcat notes
 * Java `17` is recommended. Oracle JDK or Zulu OpenJDK is preferred.
 
+* Install with sdk man:
+
+```
+sdk install java 17.0.11.fx-zulu
+sdk use java 17.0.11.fx-zulu
+```
+
 * Apache Tomcat `9` is recommended.
 
 * To prevent verbose cache warnings in the tomcat log::
