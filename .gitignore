@@ -25,3 +25,7 @@ hs_err_pid*
 
 # never push the .env file to the repository
 .env
+
+# Ignore target directory and tomcat logs
+target/
+apache-tomcat-9.0.91/logs
