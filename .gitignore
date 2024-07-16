@@ -30,3 +30,5 @@ hs_err_pid*
 # Ignore target directory and tomcat logs
 target/
 apache-tomcat-9.0.91/logs
+src/test/
+
