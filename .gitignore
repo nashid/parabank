@@ -25,6 +25,7 @@ hs_err_pid*
 
 # never push the .env file to the repository
 .env
+.idea/
 
 # Ignore target directory and tomcat logs
 target/
