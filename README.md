@@ -95,3 +95,131 @@ __soatest(.sh\|.bat)__                 | Executes Parasoft SOAtest API and Web f
 set-vars.(.sh\|.bat): setup JTEST_HOME and SOATEST_HOME environment variable before running any script.
 all reports will be stored under target/report/<build ID> directory.
 on Windows, 7zip must be installed (default to C:\Program Files\7-zip) to run deploy-jtest-monitor.bat script.
+
+# Errors that I have encountered
+
+- After running the application, I encountered the following error:
+  http://localhost:8080/parabank
+
+```
+HTTP Status 404 – Not Found
+Type Status Report
+
+Message The requested resource [/parabank] is not available
+
+Description The origin server did not find a current representation for the target resource or is not willing to disclose that one exists.
+
+Apache Tomcat/9.0.91
+```
+
+- When I open the http://localhost:8080/manager and start the `/parabank` application, I encountered the following error:
+
+```
+FAIL - Application at context path [/parabank] could not be started
+FAIL - Encountered exception [org.apache.catalina.LifecycleException: Failed to start component [org.apache.catalina.webresources.StandardRoot@545a0f4]]
+```
+
+- In the `catalina.out`, I get the following error:
+
+```
+15-Jul-2024 14:42:06.731 SEVERE [http-nio-8080-exec-1] org.apache.catalina.startup.ExpandWar.copy Error copying [/Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/0-parabank] to [/Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/3-parabank]
+	java.io.FileNotFoundException: /Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/0-parabank (No such file or directory)
+		at java.base/java.io.FileInputStream.open0(Native Method)
+		at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+		at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+		at org.apache.catalina.startup.ExpandWar.copy(ExpandWar.java:254)
+		at org.apache.catalina.startup.ContextConfig.antiLocking(ContextConfig.java:902)
+		at org.apache.catalina.startup.ContextConfig.beforeStart(ContextConfig.java:942)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:292)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:109)
+		at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:385)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:163)
+		at org.apache.catalina.manager.ManagerServlet.start(ManagerServlet.java:1303)
+		at org.apache.catalina.manager.HTMLManagerServlet.start(HTMLManagerServlet.java:642)
+		at org.apache.catalina.manager.HTMLManagerServlet.doPost(HTMLManagerServlet.java:188)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:199)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.CsrfPreventionFilter.doFilter(CsrfPreventionFilter.java:428)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.HttpHeaderSecurityFilter.doFilter(HttpHeaderSecurityFilter.java:129)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:597)
+		at org.apache.catalina.valves.RequestFilterValve.process(RequestFilterValve.java:355)
+		at org.apache.catalina.valves.RemoteAddrValve.invoke(RemoteAddrValve.java:54)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:388)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:936)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:840)
+15-Jul-2024 14:42:08.571 INFO [http-nio-8080-exec-2] org.apache.catalina.util.LifecycleBase.stop The stop() method was called on component [WebappLoader[StandardEngine[Catalina].StandardHost[localhost].StandardContext[/parabank]]] after stop() had already been called. The second call will be ignored.
+15-Jul-2024 14:42:08.571 INFO [http-nio-8080-exec-2] org.apache.catalina.util.LifecycleBase.destroy The destroy() method was called on component [org.apache.catalina.webresources.DirResourceSet@5272fe27] after destroy() had already been called. The second call will be ignored.
+15-Jul-2024 14:42:08.572 SEVERE [http-nio-8080-exec-2] org.apache.catalina.startup.ExpandWar.copy Error copying [/Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/0-parabank] to [/Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/4-parabank]
+	java.io.FileNotFoundException: /Users/nashid/repos/apache/apache-tomcat-9.0.91/temp/0-parabank (No such file or directory)
+		at java.base/java.io.FileInputStream.open0(Native Method)
+		at java.base/java.io.FileInputStream.open(FileInputStream.java:216)
+		at java.base/java.io.FileInputStream.<init>(FileInputStream.java:157)
+		at org.apache.catalina.startup.ExpandWar.copy(ExpandWar.java:254)
+		at org.apache.catalina.startup.ContextConfig.antiLocking(ContextConfig.java:902)
+		at org.apache.catalina.startup.ContextConfig.beforeStart(ContextConfig.java:942)
+		at org.apache.catalina.startup.ContextConfig.lifecycleEvent(ContextConfig.java:292)
+		at org.apache.catalina.util.LifecycleBase.fireLifecycleEvent(LifecycleBase.java:109)
+		at org.apache.catalina.util.LifecycleBase.setStateInternal(LifecycleBase.java:385)
+		at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:163)
+		at org.apache.catalina.manager.ManagerServlet.start(ManagerServlet.java:1303)
+		at org.apache.catalina.manager.HTMLManagerServlet.start(HTMLManagerServlet.java:642)
+		at org.apache.catalina.manager.HTMLManagerServlet.doPost(HTMLManagerServlet.java:188)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:555)
+		at javax.servlet.http.HttpServlet.service(HttpServlet.java:623)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:199)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.CsrfPreventionFilter.doFilter(CsrfPreventionFilter.java:428)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.filters.HttpHeaderSecurityFilter.doFilter(HttpHeaderSecurityFilter.java:129)
+		at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:168)
+		at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:144)
+		at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:168)
+		at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+		at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:597)
+		at org.apache.catalina.valves.RequestFilterValve.process(RequestFilterValve.java:355)
+		at org.apache.catalina.valves.RemoteAddrValve.invoke(RemoteAddrValve.java:54)
+		at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:130)
+		at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+		at org.apache.catalina.valves.AbstractAccessLogValve.invoke(AbstractAccessLogValve.java:660)
+		at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+		at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:346)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:388)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:936)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1791)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
+		at java.base/java.lang.Thread.run(Thread.java:840)
+15-Jul-2024 14:42:34.724 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+15-Jul-2024 14:42:34.724 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+```
+
+Not sure what went wrong.

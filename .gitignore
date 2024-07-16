@@ -1,37 +1,27 @@
-*.bak
-/target/
-hs_err_*.log
+# Compiled class file
+*.class
+.idea/
+# Log file
 *.log
 
-# Parasoft-specific:
-.parasoft
-.jtest/
-jtest-ma/
-jtest-sa/
-jtest-ut/
-jtest-mt-cov/
-jtest-ft-cov/
-/soatest/.metadata/
-/soatest/localsettings.properties
-/soatest/report-bookstore/
-/soatest/report-parabank/
-/soatest/TestAssets/test_templates/
-/soatest/stubs/
+# BlueJ files
+*.ctxt
 
-# Phabricator Arcanist
-/.arcconfig
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
 
-# All below configurations are copied from: https://github.com/github/gitignore/blob/master/Global/JetBrains.gitignore 
-# Covers JetBrains IDEs: IntelliJ
-# Reference: https://intellij-support.jetbrains.com/hc/en-us/articles/206544839
+# Package Files #
+*.jar
+*.war
+*.nar
+*.ear
 
-# User-specific stuff:
-**/.idea/**/workspace.xml
-**/.idea/**/runConfigurations/
+*.tar.gz
+*.rar
+__pycache__/
+*.DS_Store
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
 
-# Gradle:
-**/.idea/**/gradle.xml
-**/.idea/**/libraries/
-
-# IntelliJ
-out/
+# never push the .env file to the repository
+.env
